@@ -556,9 +556,9 @@ class BBRFClient:
             
             # If the provided hostname in -d does not match the parsed hostname,
             # we won't add it to avoid polluting the dataset
-            if u.hostname and not u.hostname == hostname:
-                self.debug("Provided hostname "+hostname+" did not match parsed hostname "+u.hostname+", skipping...")
-                continue
+            # if u.hostname and not u.hostname == hostname:
+            #     self.debug("Provided hostname "+hostname+" did not match parsed hostname "+u.hostname+", skipping...")
+            #     continue
                 
             # If the provided URL is relative, we need to rewrite the URL
             # with the provided hostname, and we will ALWAYS assume http port 80
@@ -582,7 +582,7 @@ class BBRFClient:
                 self.debug("skipping outscoped hostname: "+hostname)
                 continue
             # It must match the in scope
-            if not self.get_program() == '@INFER' and not self.matches_scope(hostname, inscope):
+            if not self.get_program() == '@INFER' and not REGEX_IP.match(hostname) and not self.matches_scope(hostname, inscope):
                 self.debug("skipping not inscope hostname: "+hostname)
                 continue
             
